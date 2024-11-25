@@ -2,7 +2,7 @@ import pygame as pg
 from config import * 
 import math
 import random
-
+#
 
 class Spritesheet:
     def __init__(self, file):
@@ -42,7 +42,9 @@ class Player(pg.sprite.Sprite): #
     def update(self):
         self.movement() 
         self.rect.x += self.x_change
+        self.colide_blocks('x')
         self.rect.y += self.y_change
+        self.colide_blocks('y')
         
         self.x_change = 0
         self.y_change = 0
@@ -61,7 +63,22 @@ class Player(pg.sprite.Sprite): #
         if keys[pg.K_DOWN]:
             self.y_change += PLAYER_SPEED
             self.facing = 'down'
-
+    
+    def colide_blocks(self,direction): # метод определяет колизию, параметр - направление
+        if direction == 'x':
+            hits = pg.sprite.spritecollide(self,self.game.blocks, False) # проверяем, находится ли хитбокс игрока в хитбоксе блока
+            if hits: # еслли находится
+                if self.x_change>0: # проверяем движется игрок влево или вправо
+                    self.rect.x = hits[0].rect.left - self.rect.width
+                if self.x_change<0: # проверяем движется игрок влево или вправо
+                    self.rect.x = hits[0].rect.right
+        if direction == 'y':
+            hits = pg.sprite.spritecollide(self,self.game.blocks, False) # проверяем, находится ли хитбокс игрока в хитбоксе блока
+            if hits: # еслли находится
+                if self.y_change>0: # проверяем движется игрок влево или вправо
+                    self.rect.y = hits[0].rect.top - self.rect.height
+                if self.y_change<0: # проверяем движется игрок влево или вправо
+                    self.rect.y = hits[0].rect.bottom
 
 class Block(pg.sprite.Sprite):
     def __init__(self, game,x,y):

@@ -13,8 +13,8 @@ class Game:
         self.running = True
         
         # загружаем спрайты здесь
-        self.character_spritesheet = Spritesheet('Pygame RPG Tutorial/img/character.png') # загружаем спрайт игрока
-        self.terrain_spritesheet = Spritesheet('Pygame RPG Tutorial/img/terrain.png') # загружаем спрайит ландшавта
+        self.character_spritesheet = Spritesheet('img/character.png') # загружаем спрайт игрока
+        self.terrain_spritesheet = Spritesheet('img/terrain.png') # загружаем спрайит ландшавта
         
     def createTilemap(self):    
         for i,row in enumerate(tilemap):
