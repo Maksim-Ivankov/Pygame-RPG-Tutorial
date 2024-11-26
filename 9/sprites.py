@@ -54,22 +54,22 @@ class Player(pg.sprite.Sprite): #
     def movement(self): 
         keys = pg.key.get_pressed() 
         if keys[pg.K_LEFT]:
-            for sprite in self.game.all_sprites: # эти две строки двигают всех спрайтов в противоположенную сторону, отчего кажется, что камера слежит за нами
+            for sprite in self.game.all_sprites: 
                 sprite.rect.x+=PLAYER_SPEED
             self.x_change -= PLAYER_SPEED
             self.facing = 'left'
         if keys[pg.K_RIGHT]:
-            for sprite in self.game.all_sprites: # эти две строки двигают всех спрайтов в противоположенную сторону, отчего кажется, что камера слежит за нами
+            for sprite in self.game.all_sprites: 
                 sprite.rect.x-=PLAYER_SPEED
             self.x_change += PLAYER_SPEED
             self.facing = 'right'
         if keys[pg.K_UP]:
-            for sprite in self.game.all_sprites: # эти две строки двигают всех спрайтов в противоположенную сторону, отчего кажется, что камера слежит за нами
+            for sprite in self.game.all_sprites: 
                 sprite.rect.y+=PLAYER_SPEED
             self.y_change -= PLAYER_SPEED
             self.facing = 'up'
         if keys[pg.K_DOWN]:
-            for sprite in self.game.all_sprites: # эти две строки двигают всех спрайтов в противоположенную сторону, отчего кажется, что камера слежит за нами
+            for sprite in self.game.all_sprites: 
                 sprite.rect.y-=PLAYER_SPEED
             self.y_change += PLAYER_SPEED
             self.facing = 'down'
@@ -146,7 +146,7 @@ class Player(pg.sprite.Sprite): #
             self.game.playing = False 
    
    
-# создаем класс врагов
+
 class Enemy(pg.sprite.Sprite): # 
     def __init__(self, game,x,y):
         self.game = game

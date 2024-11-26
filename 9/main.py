@@ -1,4 +1,4 @@
-# добавляем камеру
+# Добавляем атаку
 import pygame as pg
 from sprites import *
 from config import * 
