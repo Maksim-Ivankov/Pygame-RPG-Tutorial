@@ -1,4 +1,4 @@
-# добавляем экран окончания игры
+# добавляем атаку
 import pygame as pg
 from sprites import *
 from config import * 
@@ -13,8 +13,9 @@ class Game:
         self.character_spritesheet = Spritesheet('img/character.png') 
         self.terrain_spritesheet = Spritesheet('img/terrain.png') 
         self.enemy_spritesheet = Spritesheet('img/enemy.png')
+        self.attack_spritesheet = Spritesheet('img/attack.png') # добавили атаку
         self.intro_bacgraund = pg.image.load('img/introbackground.png')
-        self.go_bacgraund = pg.image.load('img/gameover.png') # фон для игры
+        self.go_bacgraund = pg.image.load('img/gameover.png') 
         
         self.font = pg.font.Font('fonts/ofont.ru_Pixel Cyr.ttf',32)
         
@@ -23,7 +24,7 @@ class Game:
             for j, column in enumerate(row):
                 Ground(self,j,i)
                 if column == 'B': Block(self,j,i)
-                if column == 'P': Player(self,j,i)
+                if column == 'P': self.player = Player(self,j,i)
                 if column == 'E': Enemy(self,j,i)
                 
     
@@ -44,6 +45,13 @@ class Game:
             if event.type == pg.QUIT:
                 self.playing = False
                 self.running = False
+            # добавляем логику на нажатие клавиши удара
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_SPACE:
+                    if self.player.facing == 'up':Attack(self,self.player.rect.x,self.player.rect.y - TILESIZE)
+                    if self.player.facing == 'down':Attack(self,self.player.rect.x,self.player.rect.y + TILESIZE)
+                    if self.player.facing == 'left':Attack(self,self.player.rect.x - TILESIZE,self.player.rect.y)
+                    if self.player.facing == 'right':Attack(self,self.player.rect.x + TILESIZE,self.player.rect.y)
         
     def update(self): 
         self.all_sprites.update()
